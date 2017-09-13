@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
  * @author aev
  */
 @Stateless
-@Path("messages")
+@Path("chat")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ChatService {   
@@ -27,14 +27,13 @@ public class ChatService {
     EntityManager em;
     
     @GET
-    public List<Message> getMessages(@QueryParam("name") String name) {
+    public List<Message> getMessages(@QueryParam("name") long conversation) {
         List<Message> result = null;
-        if(name != null) {
-            result = em.createQuery("SELECT m FROM Message m WHERE m.conversation.id = :id", 
-                    Message.class)
-                .setParameter("id", name)
-                .getResultList();
-        }
+        System.out.println("conversationid " + conversation);
+        result = em.createQuery("SELECT m FROM Message m WHERE m.conversation.id = :id", 
+                Message.class)
+            .setParameter("id", conversation)
+            .getResultList();
         
         return result != null ? result : Collections.EMPTY_LIST;
     }
@@ -42,19 +41,30 @@ public class ChatService {
 
     @POST
     @Path("add")
-    public Response addMessage(@QueryParam("name")String name, Message message) {
-        if(name != null) {
-            Conversation c = em.find(Conversation.class, name);
-            if(c == null) {
-                c = new Conversation(name);
-                em.persist(c);
-            }
-            message.setConversation(c);
-            em.persist(message);
-
-            return Response.ok(message).build();
-        } else {
-            return Response.noContent().build();
+    public Response addMessage(@QueryParam("name")long converstionid, Message message) {
+        Conversation c = em.find(Conversation.class, converstionid);
+        if(c == null) {
+            c = new Conversation();
+            em.persist(c);
         }
+        message.setConversation(c);
+        em.persist(message);
+
+        return Response.ok(message).build();
+    }
+    
+    @GET
+    @Path("stuff") 
+    public Conversation create() {
+        Conversation c = new Conversation();
+        em.persist(c);
+        System.out.println("Conversation id " + c.getId());
+        
+        for(int i = 0; i < 5; i++) {
+            Message m = new Message("user", "Message: " + i);
+            m.setConversation(c);
+            em.persist(m);            
+        }
+        return em.merge(c);
     }
 }

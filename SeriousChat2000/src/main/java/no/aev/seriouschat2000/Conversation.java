@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Version;
@@ -25,17 +26,12 @@ import lombok.NoArgsConstructor;
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Conversation implements Serializable {
-    @Id
-    String id;
+    @Id @GeneratedValue
+    long id;
     
-    @XmlTransient
-    @OneToMany(mappedBy = "conversation",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    List<Message> messages;
+    /*@OneToMany(mappedBy = "conversation",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    List<Message> messages;*/
 
     @Version
     Timestamp version;
-
-    public Conversation(String id) {
-        this.id = id;
-    }
-}
+ }
