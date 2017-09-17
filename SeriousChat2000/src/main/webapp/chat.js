@@ -9,7 +9,7 @@ class Chat {
        //this.loadImage(this.name);
        
        this.msg.onchange = event => {
-          fetch('api/chat/add?name=' + this.name,
+          fetch('api/chat/add?name=' + '1',
             {
              method: 'POST', 
              body : JSON.stringify(new Message('TestUser',event.target.value)),
@@ -33,13 +33,13 @@ class Chat {
        
        this.worker.onmessage = event => {
            this.chat.innerHTML = '';
-           let ul = document.createElement('ul');
+           let article = document.createElement('article');
            event.data.map(message => {
-              let li = document.createElement('li');
-              li.innerHTML = `${message.user} - ${message.text}`;
-              ul.appendChild(li);
+              let chatMessage = document.createElement('p');
+              chatMessage.innerHTML = `${message.user}: ${message.text}`;
+              article.appendChild(chatMessage);
            });
-           this.chat.appendChild(ul);
+           this.chat.appendChild(article);
            this.chat.scrollTop = this.chat.scrollHeight;
        };       
    } 

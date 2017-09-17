@@ -11,8 +11,8 @@ header
     margin-left: 25%;
     margin-top: 0;
     padding: 5px;
-    background-color: #eeeeee;
-    border-radius: 0 0 20px 20px;
+    background-color: #dddddd;
+    border-radius: 0 0 10px 10px;
 }
 
 section
@@ -22,8 +22,8 @@ section
     margin-top: 10px;
     padding: 5px;
     font-family: sans-serif;
-    background-color: #eeeeee;
-    border-radius: 20px;
+    background-color: #dddddd;
+    border-radius: 10px;
 }
 
 h1
@@ -32,9 +32,49 @@ h1
     text-align: center;
 }
 
+#chat
+{
+    padding: 0;
+    font-family: sans-serif;
+    background-color: white;
+}
+
+#chat p
+{
+    margin: 0;
+    padding: 3px;
+    margin: 0;
+}
+
+#chat p:first-child
+{
+    border-radius: 10px 10px 0 0;
+}
+
+#chat p:nth-child(odd)
+{
+    background-color: #ddd;
+}
+
+#chat p:nth-child(even)
+{
+    background-color: #eee;
+}
+
+#chat p:last-child
+{
+    border-radius: 0 0 10px 10px;
+}
+
 input
 {
-    width: 95%;
+    width: 98%;
     font-size: 1.2em;
     margin: 5px;
+}
+
+#chat
+{
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
