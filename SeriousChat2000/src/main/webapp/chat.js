@@ -9,7 +9,7 @@ class Chat {
         //this.loadImage(this.name);
 
         this.msg.onchange = event => {
-            fetch('api/chat/add?name=' + '1',
+            fetch('api/chat/add?name=' + this.name,
                     {
                         method: 'POST',
                         body: JSON.stringify(new Message('TestUser', event.target.value)),

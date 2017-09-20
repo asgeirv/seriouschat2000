@@ -32,6 +32,20 @@ h1
     text-align: center;
 }
 
+#chatlist a
+{
+    text-decoration: none;
+    color: black;
+}
+
+#chatlist p
+{
+    padding: 5px;
+    background-color: #eee;
+    width: 100px;
+    text-align: center;
+}
+
 #chat
 {
     padding: 0;

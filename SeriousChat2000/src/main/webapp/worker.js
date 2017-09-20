@@ -1,6 +1,6 @@
 function getMessages()
 {
-    fetch('api/chat?name=' + '1')
+    fetch('api/chat?name=' + this.name)
             .then(response =>
             {
                 if (response.ok)
