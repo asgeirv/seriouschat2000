@@ -89,24 +89,27 @@ public class ChatService
 
         return em.merge(c);
     }
-
+/*
     @POST
     @Path("upload")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response upload(
+    @Consumes(
+            {
+                MediaType.MULTIPART_FORM_DATA
+            })
+    public Response uploadPic(
             @FormDataParam("file") InputStream is,
             @FormDataParam("file") FormDataContentDisposition details)
     {
-        System.out.println("Got file " + details.getName());
         try
         {
-            Files.copy(is, Paths.get("images", details.getFileName()));
-        } catch (IOException ex)
+            Files.copy(is, Paths.get("pix", details.getFileName()));
+        } catch (IOException e)
         {
-            Logger.getLogger(ChatService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PicService.class.getName()).log(Level.SEVERE, null, e);
             return Response.serverError().build();
         }
 
         return Response.ok().build();
     }
+*/
 }
