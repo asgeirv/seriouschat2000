@@ -18,11 +18,17 @@ header
 img
 {
     max-width: 250px;
+    margin-left: 5px;
 }
 
 #preview
 {
     height: 200px;
+    margin: 5px;
+    padding: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
 }
 
 section
@@ -44,7 +50,7 @@ section
     position: absolute;
     width: 50%;
     left: 5%;
-    top: 25%;
+    top: 10%;
 }
 
 h1

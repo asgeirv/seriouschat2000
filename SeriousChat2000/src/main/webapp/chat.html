@@ -21,26 +21,14 @@
 
         <section id="uploadframe">
             <h2>Upload image</h2>
-            <input type="file" onchange="previewFile()" /><br>
+            <input type="file" id="file" onchange="previewFile()" /><br>
             <img src="" id="preview" alt="Image preview"><br>
-            <p class ="button">OK</p>
+            <p class ="button" onclick="">OK</p>
             <p class ="button" onclick="hideUploadFrame()">Cancel</p>
         </section>
 
         <script src="chat.js"></script>
-        <script>
-                uploadFrame = document.querySelector('#uploadframe');
-                
-                function showUploadFrame()
-                {
-                    uploadFrame.style.visibility='visible';
-                }
-                
-                function hideUploadFrame()
-                {
-                    uploadFrame.style.visibility='hidden';
-                }
-        </script>
+        <script src="upload.js"></script>
 
     </body>
 </html>
