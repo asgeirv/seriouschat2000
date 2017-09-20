@@ -9,16 +9,38 @@
         <header>
             <h1>Serious Chat 2000</h1>
         </header>
-        
+
         <section id="chat">
 
         </section>
-        
+
         <section id="input">
             <input id="msg" type="text" />
+            <p class="button" onclick="showUploadFrame()">Send picture...</p>
         </section>
-        
-        <<script src="chat.js"></script>
-        
+
+        <section id="uploadframe">
+            <h2>Upload image</h2>
+            <input type="file" onchange="previewFile()" /><br>
+            <img src="" id="preview" alt="Image preview"><br>
+            <p class ="button">OK</p>
+            <p class ="button" onclick="hideUploadFrame()">Cancel</p>
+        </section>
+
+        <script src="chat.js"></script>
+        <script>
+                uploadFrame = document.querySelector('#uploadframe');
+                
+                function showUploadFrame()
+                {
+                    uploadFrame.style.visibility='visible';
+                }
+                
+                function hideUploadFrame()
+                {
+                    uploadFrame.style.visibility='hidden';
+                }
+        </script>
+
     </body>
 </html>

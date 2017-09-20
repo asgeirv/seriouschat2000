@@ -20,6 +20,11 @@ img
     max-width: 250px;
 }
 
+#preview
+{
+    height: 200px;
+}
+
 section
 {
     width: 60%;
@@ -29,6 +34,17 @@ section
     font-family: sans-serif;
     background-color: #dddddd;
     border-radius: 10px;
+}
+
+#uploadframe
+{
+    background-color: #bbb;
+    box-shadow: 0 0 15px #888;
+    visibility: hidden;
+    position: absolute;
+    width: 50%;
+    left: 5%;
+    top: 25%;
 }
 
 h1
@@ -73,6 +89,8 @@ p.button
     width: 150px;
     text-align: center;
     border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
 }
 
 p.button:hover
