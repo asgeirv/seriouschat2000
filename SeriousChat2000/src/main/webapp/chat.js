@@ -1,55 +1,48 @@
 
 class Chat {
-   constructor() {
-       this.chat = document.querySelector("#chat");
-       this.msg = document.querySelector("#msg");
-       
-       
-       this.name = new URL(document.URL).searchParams.get("name");
-       //this.loadImage(this.name);
-       
-       this.msg.onchange = event => {
-          fetch('api/chat/add?name=' + '1',
-            {
-             method: 'POST', 
-             body : JSON.stringify(new Message('TestUser',event.target.value)),
-             headers: {'Content-Type' : 'application/json; charset=UTF-8'}
-            })
-           .then(response => {
-               if(response.ok) {
-                    return response.json();
-                }
-                
-                throw new Error("Failed to send message " + event.target.value);
-            })
-           .then(message => {
-               this.msg.value = "";
-            })
-            .catch(exception => console.log("Error: " + exception));
-       };
-       
-       this.worker = new Worker("worker.js");
-       this.worker.postMessage({"name" : this.name});
-       
-       this.worker.onmessage = event => {
-           this.chat.innerHTML = '';
-           let article = document.createElement('article');
-           event.data.map(message => {
-              let chatMessage = document.createElement('p');
-              chatMessage.innerHTML = `${message.user}: ${message.text}`;
-              article.appendChild(chatMessage);
-           });
-           this.chat.appendChild(article);
-           this.chat.scrollTop = this.chat.scrollHeight;
-       };       
-   } 
-   
-   loadImage(name) {
-       let img = document.createElement('img');
-       img.src = 'api/store/' + name + '?width=200';
-       this.photo.appendChild(img);
-   }
-   
+    constructor() {
+        this.chat = document.querySelector("#chat");
+        this.msg = document.querySelector("#msg");
+
+
+        this.name = new URL(document.URL).searchParams.get("name");
+        //this.loadImage(this.name);
+
+        this.msg.onchange = event => {
+            fetch('api/chat/add?name=' + '1',
+                    {
+                        method: 'POST',
+                        body: JSON.stringify(new Message('TestUser', event.target.value)),
+                        headers: {'Content-Type': 'application/json; charset=UTF-8'}
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        }
+
+                        throw new Error("Failed to send message " + event.target.value);
+                    })
+                    .then(message => {
+                        this.msg.value = "";
+                    })
+                    .catch(exception => console.log("Error: " + exception));
+        };
+
+        this.worker = new Worker("worker.js");
+        this.worker.postMessage({"name": this.name});
+
+        this.worker.onmessage = event => {
+            this.chat.innerHTML = '';
+            let article = document.createElement('article');
+            event.data.map(message => {
+                let chatMessage = document.createElement('p');
+                chatMessage.innerHTML = `${message.user}: ${message.text}`;
+                article.appendChild(chatMessage);
+            });
+            this.chat.appendChild(article);
+            this.chat.scrollTop = this.chat.scrollHeight;
+        };
+    }
 }
 
 class Message {
