@@ -41,6 +41,7 @@ public class ChatService
     }
 
     @GET
+    @Path("conversations")
     public List<Conversation> getConversations()
     {
         return em.createQuery("SELECT c FROM Conversation c", Conversation.class)
@@ -64,19 +65,19 @@ public class ChatService
     }
 
     @GET
-    @Path("stuff")
+    @Path("newconversation")
     public Conversation create()
     {
         Conversation c = new Conversation();
         em.persist(c);
         System.out.println("Conversation id " + c.getId());
 
-        for (int i = 0; i < 5; i++)
+        /*for (int i = 0; i < 5; i++)
         {
             Message m = new Message("user", "Message: " + i);
             m.setConversation(c);
             em.persist(m);
-        }
+        }*/
         return em.merge(c);
     }
 }
