@@ -1,7 +1,13 @@
 package no.aev.seriouschat2000;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +19,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 /**
  *
@@ -45,14 +53,14 @@ public class ChatService
     public List<Conversation> getConversations()
     {
         return em.createQuery("SELECT c FROM Conversation c", Conversation.class)
-                 .getResultList();
+                .getResultList();
     }
 
     @POST
     @Path("add")
-    public Response addMessage(@QueryParam("name") long converstionid, Message message)
+    public Response addMessage(@QueryParam("name") long conversationid, Message message)
     {
-        Conversation c = em.find(Conversation.class, converstionid);
+        Conversation c = em.find(Conversation.class, conversationid);
         if (c == null)
         {
             c = new Conversation();
@@ -64,6 +72,13 @@ public class ChatService
         return Response.ok(message).build();
     }
 
+    @POST
+    @Path("img")
+    public Response addImage(@QueryParam("name") long conversationid, @QueryParam("url") String url)
+    {
+        return Response.ok().build();
+    }
+
     @GET
     @Path("newconversation")
     public Conversation create()
@@ -72,12 +87,26 @@ public class ChatService
         em.persist(c);
         System.out.println("Conversation id " + c.getId());
 
-        /*for (int i = 0; i < 5; i++)
-        {
-            Message m = new Message("user", "Message: " + i);
-            m.setConversation(c);
-            em.persist(m);
-        }*/
         return em.merge(c);
+    }
+
+    @POST
+    @Path("upload")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response upload(
+            @FormDataParam("file") InputStream is,
+            @FormDataParam("file") FormDataContentDisposition details)
+    {
+        System.out.println("Got file " + details.getName());
+        try
+        {
+            Files.copy(is, Paths.get("images", details.getFileName()));
+        } catch (IOException ex)
+        {
+            Logger.getLogger(ChatService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.serverError().build();
+        }
+
+        return Response.ok().build();
     }
 }
