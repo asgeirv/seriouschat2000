@@ -28,7 +28,7 @@ class ChatRoom
         {
             let chatButton = document.createElement('p');
             chatButton.classname = 'button';
-            chatButton.innerHTML = json[i].id;
+            chatButton.innerHTML = 'Chat #' + json[i].id;
             
             let a = document.createElement('a');
             a.href = 'chat.html?name=' + json[i].id;

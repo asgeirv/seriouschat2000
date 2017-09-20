@@ -41,9 +41,37 @@ h1
 #chatlist p
 {
     padding: 5px;
+    margin-left: 5px;
     background-color: #eee;
-    width: 100px;
+    width: 150px;
     text-align: center;
+    border-radius: 10px;
+}
+
+#chatlist p:hover
+{
+    background-color: #ccc;
+}
+
+a.button
+{
+    text-decoration: none;
+    color: black;
+}
+
+p.button
+{
+    padding: 5px;
+    margin-left: 5px;
+    background-color: #eee;
+    width: 150px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+p.button:hover
+{
+    background-color: #ccc;
 }
 
 #chat
