@@ -22,28 +22,38 @@ import javax.ws.rs.core.Response;
 @Path("chat")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ChatService {   
+public class ChatService
+{
+
     @PersistenceContext
     EntityManager em;
-    
+
     @GET
-    public List<Message> getMessages(@QueryParam("name") long conversation) {
+    public List<Message> getMessages(@QueryParam("name") long conversation)
+    {
         List<Message> result = null;
         System.out.println("conversationid " + conversation);
-        result = em.createQuery("SELECT m FROM Message m WHERE m.conversation.id = :id", 
-                Message.class)
-            .setParameter("id", conversation)
-            .getResultList();
-        
+        result = em.createQuery("SELECT m FROM Message m WHERE m.conversation.id = :id", Message.class)
+                .setParameter("id", conversation)
+                .getResultList();
+
         return result != null ? result : Collections.EMPTY_LIST;
     }
 
+    @GET
+    public List<Conversation> getConversations()
+    {
+        return em.createQuery("SELECT c FROM Conversation c", Conversation.class)
+                 .getResultList();
+    }
 
     @POST
     @Path("add")
-    public Response addMessage(@QueryParam("name")long converstionid, Message message) {
+    public Response addMessage(@QueryParam("name") long converstionid, Message message)
+    {
         Conversation c = em.find(Conversation.class, converstionid);
-        if(c == null) {
+        if (c == null)
+        {
             c = new Conversation();
             em.persist(c);
         }
@@ -52,18 +62,20 @@ public class ChatService {
 
         return Response.ok(message).build();
     }
-    
+
     @GET
-    @Path("stuff") 
-    public Conversation create() {
+    @Path("stuff")
+    public Conversation create()
+    {
         Conversation c = new Conversation();
         em.persist(c);
         System.out.println("Conversation id " + c.getId());
-        
-        for(int i = 0; i < 5; i++) {
+
+        for (int i = 0; i < 5; i++)
+        {
             Message m = new Message("user", "Message: " + i);
             m.setConversation(c);
-            em.persist(m);            
+            em.persist(m);
         }
         return em.merge(c);
     }
