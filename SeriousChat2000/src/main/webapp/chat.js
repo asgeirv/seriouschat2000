@@ -2,6 +2,7 @@
 class Chat {
     constructor() {
         this.chat = document.querySelector("#chat");
+        this.usr = document.querySelector('#usr');
         this.msg = document.querySelector("#msg");
 
 
@@ -12,7 +13,7 @@ class Chat {
             fetch('api/chat/add?name=' + this.name,
                     {
                         method: 'POST',
-                        body: JSON.stringify(new Message('TestUser', event.target.value)),
+                        body: JSON.stringify(new Message(this.usr.value, this.msg.value)),
                         headers: {'Content-Type': 'application/json; charset=UTF-8'}
                     })
                     .then(response => {

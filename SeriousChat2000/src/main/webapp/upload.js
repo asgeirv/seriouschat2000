@@ -1,4 +1,5 @@
 let uploadFrame = document.querySelector('#uploadframe');
+var url;
 
 function previewFile()
 {
@@ -13,11 +14,18 @@ function previewFile()
 
     if (file)
     {
-        reader.readAsDataURL(file);
+        url = reader.readAsDataURL(file);
+        console.log(url);
     } else
     {
         preview.src = '';
     }
+}
+
+function uploadFile ()
+{
+    
+    hideUploadFrame();
 }
 
 function showUploadFrame()
