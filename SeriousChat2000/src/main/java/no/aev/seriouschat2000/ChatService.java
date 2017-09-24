@@ -89,7 +89,7 @@ public class ChatService
 
         return em.merge(c);
     }
-/*
+
     @POST
     @Path("upload")
     @Consumes(
@@ -111,5 +111,5 @@ public class ChatService
 
         return Response.ok().build();
     }
-*/
+
 }

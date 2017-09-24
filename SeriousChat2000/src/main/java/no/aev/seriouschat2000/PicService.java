@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
-import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -33,14 +32,14 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
  *
  * @author aev
  */
-@Path("store")
+@Path("chat")
 public class PicService
 {
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     @GET
-    @Path("pix")
+    @Path("upload")
     public Response getImages()
     {
         JsonArrayBuilder builder = Json.createArrayBuilder();
@@ -92,7 +91,7 @@ public class PicService
         
         return Response.ok(result).cacheControl(cc).build();
     }
-
+/*
     @POST
     @Path("upload")
     @Consumes(
@@ -113,5 +112,5 @@ public class PicService
         }
 
         return Response.ok().build();
-    }
+    }*/
 }
