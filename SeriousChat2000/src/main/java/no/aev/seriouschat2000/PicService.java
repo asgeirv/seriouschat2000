@@ -91,7 +91,7 @@ public class PicService
         
         return Response.ok(result).cacheControl(cc).build();
     }
-/*
+
     @POST
     @Path("upload")
     @Consumes(
@@ -112,5 +112,5 @@ public class PicService
         }
 
         return Response.ok().build();
-    }*/
+    }
 }

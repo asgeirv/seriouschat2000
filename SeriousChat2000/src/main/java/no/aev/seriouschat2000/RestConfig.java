@@ -26,6 +26,7 @@ public class RestConfig extends Application
     private void addRestResourceClasses(Set<Class<?>> resources)
     {
         resources.add(no.aev.seriouschat2000.ChatService.class);
+        //resources.add(no.aev.seriouschat2000.PicService.class);
         resources.add(no.aev.seriouschat2000.PicService.class);
     }
 }

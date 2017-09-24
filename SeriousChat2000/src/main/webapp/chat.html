@@ -22,7 +22,7 @@
 
         <section id="uploadframe">
             <h2>Upload image</h2>
-            <form enctype="multipart/form-data" action="/api/upload" method="post">
+            <form enctype="multipart/form-data" action="/api/chat/upload" method="post">
                 <input type="file" id="file" onchange="previewFile()" /><br>
                 <img src="" id="preview" alt="Image preview"><br>
                 <button type="submit" onclick="hideUploadFrame">OK</button>

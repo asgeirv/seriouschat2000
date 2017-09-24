@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -89,7 +90,7 @@ public class ChatService
 
         return em.merge(c);
     }
-
+/*
     @POST
     @Path("upload")
     @Consumes(
@@ -98,10 +99,12 @@ public class ChatService
             })
     public Response uploadPic(
             @FormDataParam("file") InputStream is,
-            @FormDataParam("file") FormDataContentDisposition details)
+            @FormDataParam("file") FormDataContentDisposition details,
+            @FormDataParam("path") String path)
     {
         try
         {
+            System.out.println("path::" + path);
             Files.copy(is, Paths.get("pix", details.getFileName()));
         } catch (IOException e)
         {
@@ -111,5 +114,5 @@ public class ChatService
 
         return Response.ok().build();
     }
-
+*/
 }
